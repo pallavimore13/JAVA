@@ -1,6 +1,7 @@
 import java.util.*;
 
-class Librarian {
+class Librarian
+{
     public String[] bookNames = new String[500];
     public String[] authorNames = new String[500];
     public int numBook = 20;
@@ -67,7 +68,8 @@ class LibraryManagement extends Librarian
         choice = scan.nextInt();
 
         do {
-            switch (choice) {
+            switch (choice) 
+            {
                 case 1:
                     librarianMenu(scan);
                     break;
@@ -88,7 +90,8 @@ class LibraryManagement extends Librarian
     {
         int ch;
 
-        while (true) {
+        while (true) 
+        {
             System.out.println("Welcome...");
             System.out.println("1. Add Book");
             System.out.println("2. Issue Book");
@@ -100,7 +103,8 @@ class LibraryManagement extends Librarian
             System.out.print("Perform Operation : ");
             ch = scan.nextInt();
 
-            switch (ch) {
+            switch (ch) 
+            {
                 case 1:
                     int index = librarian.addBook(librarian.bookNames, librarian.authorNames);
                     if (index != -1)
@@ -141,10 +145,12 @@ class LibraryManagement extends Librarian
         }
     }
 
-    public static void studentMenu(Scanner scan) {
+    public static void studentMenu(Scanner scan) 
+    {
         int op;
 
-        do {
+        do 
+        {
             System.out.println("Welcome...");
             System.out.println("1. Borrow Book");
             System.out.println("2. Return Book");
@@ -154,7 +160,8 @@ class LibraryManagement extends Librarian
             System.out.print("Perform Operation : ");
             op = scan.nextInt();
             
-            switch (op) {
+            switch (op) 
+            {
                 case 1:
                     // Logic for borrowing book
                     break;
@@ -177,4 +184,5 @@ class LibraryManagement extends Librarian
         } while (op != 4);
     }
 }
+
 
