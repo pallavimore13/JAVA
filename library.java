@@ -1,6 +1,7 @@
 import java.util.*;
 
-class Librarian {
+class LibraryManagement
+{
     public String[] bookNames = new String[500];
     public String[] authorNames = new String[500];
     public int numBook = 0;
@@ -118,12 +119,10 @@ class Librarian {
 		System.out.println("Book not found or cannot be borrowed.");
 		return false;
 	    }
-}
-
-class LibraryManagement extends Librarian 
-{
-    static int choice;
-    static Librarian librarian = new Librarian();
+	    
+	    
+	static int choice;
+       static Librarian librarian = new Librarian();
 
     public static void main(String args[]) {
         Scanner scan = new Scanner(System.in);
@@ -134,7 +133,8 @@ class LibraryManagement extends Librarian
         System.out.println("\n* Library Management System *");
         System.out.println("1. Librarian Login");
         System.out.println("2. Student Login");
-        System.out.println("3. Exit");
+        System.out.println("3. Faculty Login");
+        System.out.println("4. Exit");
 
         System.out.print("Enter your choice  : ");
         choice = scan.nextInt();
@@ -143,14 +143,18 @@ class LibraryManagement extends Librarian
             switch (choice) 
             {
                 case 1:
-                    librarianMenu(scan);
+                    Librarian.librarianMenu(scan);
                     break;
 
                 case 2:
-                    studentMenu(scan);
+                    Student.studentMenu(scan);
                     break;
-                   
+                
                 case 3:
+                    Faculty.facultyMenu(scan);
+                    break;
+                    
+                case 4:
                     exit = true;
                     System.out.println("Exiting...");
                     break;
@@ -163,10 +167,18 @@ class LibraryManagement extends Librarian
         scan.close();
     }
 
+}
+
+	
+
+class Librarian extends LibraryManagement
+{
+    static Scanner scan = new Scanner(System.in);
+    
     public static void librarianMenu(Scanner scan) 
     {
         int ch
-;
+;	
 
         while (true) {
             //System.out.println("Welcome...");
@@ -246,9 +258,13 @@ class LibraryManagement extends Librarian
                     System.out.println("Invalid operation...");
             }
         }
-    }
-
-    public static void studentMenu(Scanner scan) {
+    }	
+}
+class Student extends LibraryManagement
+{
+	static Scanner scan = new Scanner(System.in);
+	
+	public static void studentMenu(Scanner scan) {
         int op;
 
         do {
@@ -309,5 +325,73 @@ class LibraryManagement extends Librarian
             }
         } while (op != 4);
     }
+    
+	
 }
+class Faculty extends LibraryManagement
+{	
+	static Scanner scan = new Scanner(System.in);
+	
+	public static void facultyMenu(Scanner scan)
+    	{
+    	int op;
 
+        do {
+            //System.out.println("Welcome...");
+            System.out.println("\n1. Borrow Book");
+            System.out.println("2. Return Book");
+            System.out.println("3. Available Books");
+            System.out.println("4. Log Out");
+
+            System.out.print("Perform Operation : ");
+            op = scan.nextInt();
+
+            switch (op) {
+                case 1:
+                    // Logic for borrowing book
+                    System.out.println("Book name: ");
+                    String bookToBorrow = scan.next();
+                    System.out.println("Enter your name: ");
+                    String studentName = scan.next();
+                    librarian.borrowBook(bookToBorrow, studentName);
+                    break;
+
+                case 2:
+                    // Logic for returning book
+                    System.out.println("Book name: ");
+                    String bookToReturn = scan.next();
+                    System.out.println("Enter your name: ");
+                    String studentNameReturn = scan.next();
+                    // Assuming returning a book doesn't need additional logic, just acknowledging it.
+                    System.out.println("Book '" + bookToReturn + "' returned by " + studentNameReturn);
+                    
+                    break;
+
+                case 3:
+                    // Logic for displaying available books
+                     String[] available = librarian.availableBooks();
+                    if (available.length == 0) 
+                    {
+                        System.out.println("No books available.");
+                    } 
+                    else 
+                    {
+                        System.out.println("Available Books:");
+                        for (String book : available) 
+                        {
+                            System.out.println(book);
+                        }
+                    }
+                    
+                    break;
+
+                case 4:
+                    System.out.println("Logging out...");
+                    break;
+
+                default:
+                    System.out.println("Invalid operation...");
+            }
+        } while (op != 4);
+    }
+}
